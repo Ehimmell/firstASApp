@@ -10,25 +10,31 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="249dp"
+        android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="132dp" />
+            android:layout_height="77dp" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:hint="Enter a single operation equation..." />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="171dp"
+            android:layout_height="wrap_content"
+            android:text="Ans" />
 
         <Button
             android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="=" />
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/name"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Enter a single operation equation..." />
 
     </com.google.android.material.appbar.AppBarLayout>
 

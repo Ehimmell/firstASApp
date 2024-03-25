@@ -25,7 +25,9 @@ public class MainActivity2 extends AppCompatActivity {
 
     private TextView text;
 
-    private Button button;
+    private Button equals;
+
+    private Button ans;
 
     private TextInputEditText textInput;
 
@@ -37,12 +39,14 @@ public class MainActivity2 extends AppCompatActivity {
 
         textInput = (TextInputEditText)findViewById(R.id.name);
 
-        button = (Button)findViewById(R.id.button2);
+        equals = (Button)findViewById(R.id.button2);
 
         text = (TextView)findViewById(R.id.textView);
 
+        ans = (Button)findViewById(R.id.button);
 
-        button.setOnClickListener(new View.OnClickListener(){
+
+        equals.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 String userInput = textInput.getText().toString();
