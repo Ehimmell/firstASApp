@@ -74,7 +74,7 @@ public class MainActivity2 extends AppCompatActivity {
 
 
                     }catch(Exception ex) {
-                        text.setText("One or more of your expressions is  not a number");
+                        text.setText("One or more of your expressions is not a number");
                     }
                 } else {
                     text.setText("This is not an equation");
