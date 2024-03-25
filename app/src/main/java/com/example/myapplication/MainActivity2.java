@@ -46,6 +46,17 @@ public class MainActivity2 extends AppCompatActivity {
         ans = (Button)findViewById(R.id.button);
 
 
+        ans.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String current = textInput.getText().toString();
+                String answer = text.getText().toString();
+
+                current += answer;
+
+                textInput.setText(current);
+            }
+        });
         equals.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -70,7 +81,7 @@ public class MainActivity2 extends AppCompatActivity {
                     double secondNumber;
                     try {
                         firstNumber = Double.parseDouble(firstPart);
-                        secondNumber = Integer.parseInt(secondPart);
+                        secondNumber = Double.parseDouble(secondPart);
 
                         double total;
                         if ((prodIndex == -1) && (subIndex == -1)) {
