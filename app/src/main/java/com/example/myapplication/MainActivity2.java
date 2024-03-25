@@ -41,17 +41,43 @@ public class MainActivity2 extends AppCompatActivity {
 
         text = (TextView)findViewById(R.id.textView);
 
+
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 String userInput = textInput.getText().toString();
 
-                if(userInput.equals("carter")) {
-                    text.setText("smells");
-                } else if(userInput.equals("ethan")) {
-                    text.setText("rules");
+                int addIndex = userInput.indexOf("+");
+                int subIndex = userInput.indexOf("-");
+
+                int operatorIndex = Math.max(addIndex, subIndex);
+
+                if(operatorIndex != -1) {
+                    String firstPart = userInput.substring(0, operatorIndex);
+                    String secondPart = userInput.substring(operatorIndex + 1, userInput.length());
+
+                    int firstNumber;
+                    int secondNumber;
+                    try {
+                        firstNumber = Integer.parseInt(firstPart);
+                        secondNumber = Integer.parseInt(secondPart);
+
+                        int total;
+                        if ((addIndex != -1) && (subIndex == -1)) {
+                             total = firstNumber + secondNumber;
+                            text.setText(String.valueOf(total));
+                        } else if((subIndex != 1) && (addIndex == -1)) {
+                            total = firstNumber - secondNumber;
+                            text.setText(String.valueOf(total));
+                        }
+
+
+
+                    }catch(Exception ex) {
+                        text.setText("One or more of your expressions is  not a number");
+                    }
                 } else {
-                    text.setText(userInput);
+                    text.setText("This is not an equation");
                 }
             }
 
