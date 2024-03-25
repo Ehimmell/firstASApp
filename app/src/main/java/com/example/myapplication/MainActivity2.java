@@ -49,25 +49,37 @@ public class MainActivity2 extends AppCompatActivity {
 
                 int addIndex = userInput.indexOf("+");
                 int subIndex = userInput.indexOf("-");
+                int multIndex = userInput.indexOf("*");
+                int divIndex = userInput.indexOf("/");
 
-                int operatorIndex = Math.max(addIndex, subIndex);
+
+                int sumIndex = Math.max(addIndex, subIndex);
+                int prodIndex = Math.max(multIndex, divIndex);
+
+                int operatorIndex = Math.max(prodIndex, sumIndex);
 
                 if(operatorIndex != -1) {
                     String firstPart = userInput.substring(0, operatorIndex);
                     String secondPart = userInput.substring(operatorIndex + 1, userInput.length());
 
-                    int firstNumber;
-                    int secondNumber;
+                    double firstNumber;
+                    double secondNumber;
                     try {
-                        firstNumber = Integer.parseInt(firstPart);
+                        firstNumber = Double.parseDouble(firstPart);
                         secondNumber = Integer.parseInt(secondPart);
 
-                        int total;
-                        if ((addIndex != -1) && (subIndex == -1)) {
+                        double total;
+                        if ((prodIndex == -1) && (subIndex == -1)) {
                              total = firstNumber + secondNumber;
-                            text.setText(String.valueOf(total));
-                        } else if((subIndex != 1) && (addIndex == -1)) {
+                             text.setText(String.valueOf(total));
+                        } else if((prodIndex == -1) && (addIndex == -1)) {
                             total = firstNumber - secondNumber;
+                            text.setText(String.valueOf(total));
+                        } else if((sumIndex == -1) && (divIndex == -1)) {
+                            total = firstNumber * secondNumber;
+                            text.setText(String.valueOf(total));
+                        } else if((sumIndex == -1) && (multIndex == -1)) {
+                            total = firstNumber / secondNumber;
                             text.setText(String.valueOf(total));
                         }
 
