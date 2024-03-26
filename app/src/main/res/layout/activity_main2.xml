@@ -31,21 +31,58 @@
             android:text="=" />
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/button"
-                android:layout_width="195dp"
+                android:layout_width="204dp"
                 android:layout_height="wrap_content"
                 android:text="Ans" />
 
             <Button
                 android:id="@+id/button3"
-                android:layout_width="208dp"
+                android:layout_width="204dp"
                 android:layout_height="wrap_content"
-                android:text="Button" />
+                android:text="Ans History" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:layout_width="150dp"
+                android:layout_height="match_parent">
+
+                <RadioButton
+                    android:id="@+id/ans1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ans1" />
+
+                <RadioButton
+                    android:id="@+id/ans2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ans2" />
+
+                <RadioButton
+                    android:id="@+id/ans3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ans3" />
+
+                <RadioButton
+                    android:id="@+id/ans4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ans4" />
+            </RadioGroup>
+
         </LinearLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
