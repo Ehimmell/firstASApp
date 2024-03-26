@@ -25,16 +25,28 @@
             android:hint="Enter a single operation equation..." />
 
         <Button
-            android:id="@+id/button"
-            android:layout_width="171dp"
-            android:layout_height="wrap_content"
-            android:text="Ans" />
-
-        <Button
             android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="=" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="195dp"
+                android:layout_height="wrap_content"
+                android:text="Ans" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="208dp"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+        </LinearLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
