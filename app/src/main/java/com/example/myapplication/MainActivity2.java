@@ -6,6 +6,8 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Button;
 
@@ -19,6 +21,9 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.myapplication.databinding.ActivityMain2Binding;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 public class MainActivity2 extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
@@ -29,13 +34,29 @@ public class MainActivity2 extends AppCompatActivity {
 
     private Button ans;
 
+    private Button ansHistory;
+
     private TextInputEditText textInput;
+
+    private RadioGroup answerOrder;
+
+    private RadioButton ans1;
+
+    private RadioButton ans2;
+
+    private RadioButton ans3;
+
+    private RadioButton ans4;
+
+    Map<RadioButton, Double> buttonMap;
+
+    ArrayList<Double> answers = new ArrayList<Double>();
+
+    RadioButton[] radioButtonList = new RadioButton[]{ans1, ans2, ans3, ans4};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_main2);
 
         textInput = (TextInputEditText)findViewById(R.id.name);
 
@@ -45,7 +66,34 @@ public class MainActivity2 extends AppCompatActivity {
 
         ans = (Button)findViewById(R.id.button);
 
+        ansHistory = (Button)findViewById(R.id.button3);
 
+        answerOrder = (RadioGroup)findViewById(R.id.ansGroup);
+
+        setContentView(R.layout.activity_main2);
+
+        answerOrder.setVisibility(View.INVISIBLE);
+
+
+        ansHistory.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                answerOrder.setVisibility(View.VISIBLE);
+                for(int i = 0; i < answers.size(); i++) {
+                    radioButtonList[i].setText(String.valueOf(answers.get(i)));
+                    buttonMap.put(radioButtonList[i], answers.get(i));
+                }
+            }
+        });
+
+        answerOrder.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                answerOrder.setVisibility(View.INVISIBLE);
+            }
+        });
         ans.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,22 +131,23 @@ public class MainActivity2 extends AppCompatActivity {
                         firstNumber = Double.parseDouble(firstPart);
                         secondNumber = Double.parseDouble(secondPart);
 
-                        double total;
+                        double total = 0;
                         if ((prodIndex == -1) && (subIndex == -1)) {
                              total = firstNumber + secondNumber;
-                             text.setText(String.valueOf(total));
                         } else if((prodIndex == -1) && (addIndex == -1)) {
                             total = firstNumber - secondNumber;
-                            text.setText(String.valueOf(total));
                         } else if((sumIndex == -1) && (divIndex == -1)) {
                             total = firstNumber * secondNumber;
-                            text.setText(String.valueOf(total));
                         } else if((sumIndex == -1) && (multIndex == -1)) {
                             total = firstNumber / secondNumber;
-                            text.setText(String.valueOf(total));
                         }
 
+                        text.setText(String.valueOf(total));
+                        answers.add(total);
 
+                        if(answers.size() > 4) {
+                            answers.remove(answers.size());
+                        }
 
                     }catch(Exception ex) {
                         text.setText("One or more of your expressions is not a number");

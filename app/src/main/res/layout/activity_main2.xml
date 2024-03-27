@@ -55,8 +55,10 @@
             android:orientation="vertical">
 
             <RadioGroup
+                android:id="@+id/ansGroup"
                 android:layout_width="150dp"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:visibility="invisible">
 
                 <RadioButton
                     android:id="@+id/ans1"
