@@ -1,48 +1,38 @@
 package com.example.myapplication;
 
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.view.View;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Button;
 
-import android.view.View;
-
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.ui.AppBarConfiguration;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import net.objecthunter.exp4j.Expression;
+import net.objecthunter.exp4j.ExpressionBuilder;
+
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class MainActivity2 extends AppCompatActivity {
 
-    private AppBarConfiguration appBarConfiguration;
-
-    private TextView text;
-
-    private Button equals;
-
-    private Button ans;
-
-    private Button ansHistory;
-
-    private TextInputEditText textInput;
-
-    private RadioGroup answerOrder;
-
-    private RadioButton ans1;
-
-    private RadioButton ans2;
-
-    private RadioButton ans3;
-
-    private RadioButton ans4;
     ArrayList<Double> answers = new ArrayList<Double>();
+    private AppBarConfiguration appBarConfiguration;
+    private TextView text;
+    private Button equals;
+    private Button ans;
+    private Button ansHistory;
+    private TextInputEditText textInput;
+    private RadioGroup answerOrder;
+    private RadioButton ans1;
+    private RadioButton ans2;
+    private RadioButton ans3;
+    private RadioButton ans4;
+    private RadioButton selectedAnswer;
+    private Double total;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,37 +40,37 @@ public class MainActivity2 extends AppCompatActivity {
 
         setContentView(R.layout.activity_main2);
 
-        textInput = (TextInputEditText)findViewById(R.id.equation);
+        textInput = findViewById(R.id.equation);
 
-        equals = (Button)findViewById(R.id.equals);
+        equals = findViewById(R.id.equals);
 
-        text = (TextView)findViewById(R.id.textView);
+        text = findViewById(R.id.textView);
 
-        ans = (Button)findViewById(R.id.answerButton);
+        ans = findViewById(R.id.answerButton);
 
-        ansHistory = (Button)findViewById(R.id.history);
+        ansHistory = findViewById(R.id.history);
 
-        answerOrder = (RadioGroup)findViewById(R.id.ansGroup);
+        answerOrder = findViewById(R.id.ansGroup);
 
         answerOrder.setVisibility(View.INVISIBLE);
 
-        ans1 = (RadioButton)findViewById(R.id.answer1);
+        ans1 = findViewById(R.id.answer1);
 
-        ans2 = (RadioButton)findViewById(R.id.answer2);
+        ans2 = findViewById(R.id.answer2);
 
-        ans3 = (RadioButton)findViewById(R.id.answer3);
+        ans3 = findViewById(R.id.answer3);
 
-        ans4 = (RadioButton)findViewById(R.id.answer4);
+        ans4 = findViewById(R.id.answer4);
 
         RadioButton[] radioButtonList = new RadioButton[]{ans1, ans2, ans3, ans4};
-
         ansHistory.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 answerOrder.setVisibility(View.VISIBLE);
-                for(int i = 0; i < answers.size(); i++) {
-                        radioButtonList[i].setText(String.valueOf(answers.get(i)));
+                for (int i = 0; i < answers.size(); i++) {
+                    radioButtonList[i].setText(String.valueOf(answers.get(i)));
+                    text.setText("Test");
                 }
             }
         });
@@ -88,8 +78,15 @@ public class MainActivity2 extends AppCompatActivity {
         answerOrder.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+                selectedAnswer = (RadioButton)findViewById(checkedId);
+                String current = textInput.getText().toString();
 
-                //answerOrder.setVisibility(View.INVISIBLE);
+                current += selectedAnswer.getText();
+
+                textInput.setText(current);
+
+                answerOrder.setVisibility(View.INVISIBLE);
+
             }
         });
         ans.setOnClickListener(new View.OnClickListener() {
@@ -103,60 +100,27 @@ public class MainActivity2 extends AppCompatActivity {
                 textInput.setText(current);
             }
         });
-        equals.setOnClickListener(new View.OnClickListener(){
+        equals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String userInput = textInput.getText().toString();
+                try {
+                    String userInput = textInput.getText().toString();
+                    Expression expression = new ExpressionBuilder(userInput).build();
+                    total = expression.evaluate();
 
-                int addIndex = userInput.indexOf("+");
-                int subIndex = userInput.indexOf("-");
-                int multIndex = userInput.indexOf("*");
-                int divIndex = userInput.indexOf("/");
+                    text.setText(String.valueOf(total));
+                    answers.add(total);
 
-
-                int sumIndex = Math.max(addIndex, subIndex);
-                int prodIndex = Math.max(multIndex, divIndex);
-
-                int operatorIndex = Math.max(prodIndex, sumIndex);
-
-                if(operatorIndex != -1) {
-                    String firstPart = userInput.substring(0, operatorIndex);
-                    String secondPart = userInput.substring(operatorIndex + 1, userInput.length());
-
-                    double firstNumber;
-                    double secondNumber;
-                    try {
-                        firstNumber = Double.parseDouble(firstPart);
-                        secondNumber = Double.parseDouble(secondPart);
-                        double total = 0;
-                        if ((prodIndex == -1) && (subIndex == -1)) {
-                             total = firstNumber + secondNumber;
-                        } else if((prodIndex == -1) && (addIndex == -1)) {
-                            total = firstNumber - secondNumber;
-                        } else if((sumIndex == -1) && (divIndex == -1)) {
-                            total = firstNumber * secondNumber;
-                        } else if((sumIndex == -1) && (multIndex == -1)) {
-                            total = firstNumber / secondNumber;
-                        }
-
-                        text.setText(String.valueOf(total));
-                        answers.add(total);
-
-                        while(answers.size() > 4) {
-                            answers.remove(answers.size() - 1);
-                        }
-
-                    }catch(Exception ex) {
-                        text.setText("One or more of your expressions is not a number" + ex);
+                    while (answers.size() > 4) {
+                        answers.remove(0);
                     }
-                } else {
-                    text.setText("This is not an equation");
+                } catch(Exception ex) {
+                    text.setText("Error");
                 }
             }
 
 
         });
-
 
     }
 

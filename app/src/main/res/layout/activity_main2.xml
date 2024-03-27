@@ -30,17 +30,23 @@
             android:layout_height="wrap_content"
             android:text="=" />
 
-        <Button
-            android:id="@+id/history"
-            android:layout_width="204dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ans History" />
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/answerButton"
-            android:layout_width="204dp"
-            android:layout_height="wrap_content"
-            android:text="Ans" />
+            <Button
+                android:id="@+id/history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ans History" />
+
+            <Button
+                android:id="@+id/answerButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ans" />
+        </LinearLayout>
 
         <RadioGroup
             android:id="@+id/ansGroup"
@@ -52,25 +58,25 @@
                 android:id="@+id/answer1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ans1" />
+                android:text="@string/noAnswerYet" />
 
             <RadioButton
                 android:id="@+id/answer2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ans2" />
+                android:text="@string/noAnswerYet" />
 
             <RadioButton
                 android:id="@+id/answer3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ans3" />
+                android:text="@string/noAnswerYet" />
 
             <RadioButton
                 android:id="@+id/answer4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ans4" />
+                android:text="@string/noAnswerYet" />
         </RadioGroup>
 
     </com.google.android.material.appbar.AppBarLayout>
