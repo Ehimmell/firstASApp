@@ -78,11 +78,9 @@ public class MainActivity2 extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Map buttonMap = new HashMap();
                 answerOrder.setVisibility(View.VISIBLE);
                 for(int i = 0; i < answers.size(); i++) {
                         radioButtonList[i].setText(String.valueOf(answers.get(i)));
-                        buttonMap.put(radioButtonList[i], answers.get(i));
                 }
             }
         });
@@ -130,7 +128,6 @@ public class MainActivity2 extends AppCompatActivity {
                     try {
                         firstNumber = Double.parseDouble(firstPart);
                         secondNumber = Double.parseDouble(secondPart);
-
                         double total = 0;
                         if ((prodIndex == -1) && (subIndex == -1)) {
                              total = firstNumber + secondNumber;
@@ -148,8 +145,6 @@ public class MainActivity2 extends AppCompatActivity {
                         while(answers.size() > 4) {
                             answers.remove(answers.size() - 1);
                         }
-
-                        text.setText(String.valueOf(answers.get(0)));
 
                     }catch(Exception ex) {
                         text.setText("One or more of your expressions is not a number" + ex);
