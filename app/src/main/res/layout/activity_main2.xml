@@ -19,73 +19,59 @@
             android:layout_height="77dp" />
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/name"
+            android:id="@+id/equation"
             android:layout_width="match_parent"
             android:layout_height="72dp"
             android:hint="Enter a single operation equation..." />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/equals"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="=" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/history"
+            android:layout_width="204dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:text="Ans History" />
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="204dp"
-                android:layout_height="wrap_content"
-                android:text="Ans" />
-
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="204dp"
-                android:layout_height="wrap_content"
-                android:text="Ans History" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/answerButton"
+            android:layout_width="204dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:text="Ans" />
 
-            <RadioGroup
-                android:id="@+id/ansGroup"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:visibility="invisible">
+        <RadioGroup
+            android:id="@+id/ansGroup"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:visibility="visible">
 
-                <RadioButton
-                    android:id="@+id/ans1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Ans1" />
+            <RadioButton
+                android:id="@+id/answer1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ans1" />
 
-                <RadioButton
-                    android:id="@+id/ans2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Ans2" />
+            <RadioButton
+                android:id="@+id/answer2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ans2" />
 
-                <RadioButton
-                    android:id="@+id/ans3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Ans3" />
+            <RadioButton
+                android:id="@+id/answer3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ans3" />
 
-                <RadioButton
-                    android:id="@+id/ans4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Ans4" />
-            </RadioGroup>
-
-        </LinearLayout>
+            <RadioButton
+                android:id="@+id/answer4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ans4" />
+        </RadioGroup>
 
     </com.google.android.material.appbar.AppBarLayout>
 

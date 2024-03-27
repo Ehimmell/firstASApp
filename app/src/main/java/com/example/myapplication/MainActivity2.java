@@ -2,8 +2,6 @@ package com.example.myapplication;
 
 import android.os.Bundle;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.widget.RadioButton;
@@ -13,15 +11,12 @@ import android.widget.Button;
 
 import android.view.View;
 
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
-import com.example.myapplication.databinding.ActivityMain2Binding;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity2 extends AppCompatActivity {
@@ -47,42 +42,47 @@ public class MainActivity2 extends AppCompatActivity {
     private RadioButton ans3;
 
     private RadioButton ans4;
-
-    Map<RadioButton, Double> buttonMap;
-
     ArrayList<Double> answers = new ArrayList<Double>();
-
-    RadioButton[] radioButtonList = new RadioButton[]{ans1, ans2, ans3, ans4};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        textInput = (TextInputEditText)findViewById(R.id.name);
+        setContentView(R.layout.activity_main2);
 
-        equals = (Button)findViewById(R.id.button2);
+        textInput = (TextInputEditText)findViewById(R.id.equation);
+
+        equals = (Button)findViewById(R.id.equals);
 
         text = (TextView)findViewById(R.id.textView);
 
-        ans = (Button)findViewById(R.id.button);
+        ans = (Button)findViewById(R.id.answerButton);
 
-        ansHistory = (Button)findViewById(R.id.button3);
+        ansHistory = (Button)findViewById(R.id.history);
 
         answerOrder = (RadioGroup)findViewById(R.id.ansGroup);
 
-        setContentView(R.layout.activity_main2);
-
         answerOrder.setVisibility(View.INVISIBLE);
 
+        ans1 = (RadioButton)findViewById(R.id.answer1);
+
+        ans2 = (RadioButton)findViewById(R.id.answer2);
+
+        ans3 = (RadioButton)findViewById(R.id.answer3);
+
+        ans4 = (RadioButton)findViewById(R.id.answer4);
+
+        RadioButton[] radioButtonList = new RadioButton[]{ans1, ans2, ans3, ans4};
 
         ansHistory.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+                Map buttonMap = new HashMap();
                 answerOrder.setVisibility(View.VISIBLE);
                 for(int i = 0; i < answers.size(); i++) {
-                    radioButtonList[i].setText(String.valueOf(answers.get(i)));
-                    buttonMap.put(radioButtonList[i], answers.get(i));
+                        radioButtonList[i].setText(String.valueOf(answers.get(i)));
+                        buttonMap.put(radioButtonList[i], answers.get(i));
                 }
             }
         });
@@ -91,7 +91,7 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
 
-                answerOrder.setVisibility(View.INVISIBLE);
+                //answerOrder.setVisibility(View.INVISIBLE);
             }
         });
         ans.setOnClickListener(new View.OnClickListener() {
@@ -145,12 +145,14 @@ public class MainActivity2 extends AppCompatActivity {
                         text.setText(String.valueOf(total));
                         answers.add(total);
 
-                        if(answers.size() > 4) {
-                            answers.remove(answers.size());
+                        while(answers.size() > 4) {
+                            answers.remove(answers.size() - 1);
                         }
 
+                        text.setText(String.valueOf(answers.get(0)));
+
                     }catch(Exception ex) {
-                        text.setText("One or more of your expressions is not a number");
+                        text.setText("One or more of your expressions is not a number" + ex);
                     }
                 } else {
                     text.setText("This is not an equation");
@@ -163,10 +165,4 @@ public class MainActivity2 extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main2);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
-    }
 }
